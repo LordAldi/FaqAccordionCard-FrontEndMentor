@@ -39,20 +39,40 @@ const Accordion = () => {
       <Card>
         <Hero>
           <div className="hero">
-            <img
-              src="/assets/images/illustration-woman-online-mobile.svg"
-              alt="woman"
-            />
-          </div>
-          <div className="pattern">
-            <img src="/assets/images/bg-pattern-mobile.svg" alt="pattern" />
+            <picture>
+              <source
+                media="(min-width:768px)"
+                srcSet="/assets/images/illustration-woman-online-desktop.svg"
+              />
+              <img
+                src="/assets/images/illustration-woman-online-mobile.svg"
+                alt="Hero"
+              />
+            </picture>
+            <div className="pattern">
+              <picture>
+                <source
+                  media="(min-width:768px)"
+                  srcSet="/assets/images/bg-pattern-desktop.svg"
+                />
+                <img src="/assets/images/bg-pattern-mobile.svg" alt="pattern" />
+              </picture>
+            </div>
+            <div className="box">
+              <img
+                src="/assets/images/illustration-box-desktop.svg"
+                alt="pattern"
+              />
+            </div>
           </div>
         </Hero>
-        <Title>FAQ</Title>
-        <div className="faq">
-          {faqs.map((faq, i) => (
-            <Collapsible key={i} faq={faq} />
-          ))}
+        <div className="card-content">
+          <Title>FAQ</Title>
+          <div className="faq">
+            {faqs.map((faq, i) => (
+              <Collapsible key={i} faq={faq} />
+            ))}
+          </div>
         </div>
       </Card>
     </Container>
@@ -63,7 +83,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
 
-  padding: 10em 1em;
+  padding: 10em 1em 0;
   display: flex;
   justify-content: center;
   /* align-items: center; */
@@ -81,12 +101,15 @@ const Container = styled.div`
     bottom: 0;
     z-index: -1;
   }
+  @media (min-width: 768px) {
+    padding: 5em 1em 0;
+  }
 `;
 
 const Card = styled.div`
   background-color: white;
   width: 100%;
-  max-width: 1100px;
+  max-width: 950px;
   border-radius: 25px;
   padding: 1em;
   display: flex;
@@ -95,6 +118,13 @@ const Card = styled.div`
   height: 100%;
   .faq {
     width: 100%;
+  }
+  @media (min-width: 768px) {
+    flex-direction: row;
+    padding: 5em;
+    .card-content {
+      width: 80%;
+    }
   }
 `;
 const Hero = styled.div`
@@ -105,15 +135,62 @@ const Hero = styled.div`
   right: 15px;
   .hero {
     position: absolute;
+    height: 100%;
   }
   .pattern {
     position: relative;
-    top: 110px;
-    left: 15px;
+    bottom: 100px;
+    left: 25px;
+  }
+  .box {
+    display: none;
+  }
+  @media (min-width: 768px) {
+    @keyframes updown {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-20px);
+      }
+    }
+    width: 50%;
+    .hero {
+      position: relative;
+      right: 150px;
+      top: 100px;
+    }
+    .pattern {
+      position: absolute;
+      bottom: -50px;
+      left: 0px;
+      img {
+        width: 472px;
+        object-fit: contain;
+      }
+    }
+    .box {
+      display: block;
+      position: absolute;
+      bottom: 60px;
+      left: -10px;
+      animation-duration: 1s;
+      animation-name: updown;
+      animation-iteration-count: infinite;
+      animation-direction: alternate;
+      img {
+        width: 180px;
+      }
+    }
   }
 `;
 
 const Title = styled.h1`
   font-size: 2rem;
+  text-align: center;
+  @media (min-width: 768px) {
+    font-size: 2.4rem;
+    text-align: left;
+  }
 `;
 export default Accordion;

@@ -12,7 +12,7 @@ const Collapsible = ({ faq }) => {
       <div className={`question`}>
         <h4 className={`${open ? "bold" : ""}`}>{faq.question}</h4>
         <span className={`${open ? "flip" : ""}`}>
-          <img src="/assets/images/icon-arrow-down.svg" />
+          <img src="/assets/images/icon-arrow-down.svg" alt=">" />
         </span>
       </div>
       <p className={`answer ${!open ? "hidden" : ""}`}>{faq.answer}</p>
@@ -23,6 +23,7 @@ const Collapsible = ({ faq }) => {
 const Collaps = styled.div`
   font-size: 0.9rem;
   width: 100%;
+  cursor: pointer;
   .question {
     display: flex;
     align-items: center;
